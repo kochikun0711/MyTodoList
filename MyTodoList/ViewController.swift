@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     //データを保存
                     userDefaults.synchronize()
                 } catch {
-                    //エラー処理なし
+                    
                 }
             }
             
