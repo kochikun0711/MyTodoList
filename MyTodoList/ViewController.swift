@@ -45,20 +45,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //テキストエリアを追加
         alertController.addTextField(configurationHandler: nil)
         //OKボタンを追加
-        let okAction = UIAlertAction(title:"OK", style: UIAlertAction.Style.default) {(action: UIAlertAction)in
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (action: UIAlertAction) in
             
             
             
             //OKボタンがタップされた時の処理
-            if let textField = alertController.textFields?.first{
+            if let textField = alertController.textFields?.first {
                 //TODOの配列に入力値を挿入。先頭に挿入する。
                 let myTodo = MyTodo()
                 myTodo.todoTitle = textField.text!
                 //ToDOの配列の０番目に入力値を格納
-                self.todoList.insert(myTodo, at:0)
+                self.todoList.insert(myTodo, at: 0)
                 //テーブルに行が追加されたことをテーブルに通知
-                self.tableView.insertRows(at: [IndexPath(row:0,section:0)],
-                                          with:UITableView.RowAnimation.right)
+                self.tableView.insertRows(at: [IndexPath(row: 0,section: 0)],
+                                          with: UITableView.RowAnimation.right)
                 //ToDoの保存処理
                 let userDefaults = UserDefaults.standard
                 //Data型にシリアライズする
@@ -78,12 +78,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //OKボタンがタップされた時の処理
         alertController.addAction(okAction)
         //CANCELボタンがタップされた時の処理
-        let cancelButton = UIAlertAction(title:"CANCEL",
+        let cancelButton = UIAlertAction(title: "CANCEL",
                                          style: UIAlertAction.Style.cancel, handler: nil)
         //CANCELボタンを追加
         alertController.addAction(cancelButton)
         //アラートダイアログを表示
-        present(alertController, animated: true, completion:nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     //テーブルの行数を返却する
@@ -95,11 +95,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //テーブルの行ごとのセルを返却する
     func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Storyboardで指定したToDoCELL識別を利用してサイリ用可能なセルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
         //行番号にあったToDoのタイトルを取得
-        let todoTitle = todoList[indexPath.row]
+        let myTodo = todoList[indexPath.row]
         //セルのラベルにToDoのタイトルをセット
         cell.textLabel?.text = myTodo.todoTitle
         //セルのチェックマーク状態をセット　もしmyTodoのtodoDoneがtrueならチェックをつけ、falseならチェックを外す
@@ -158,6 +158,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 //UserDefaultsに保存
                 let userDefaults =  UserDefaults.standard
                 userDefaults.set(data, forKey: "todoList")
+                userDefaults.synchronize()
             } catch {
                 //エラー処理なし
             }
@@ -186,7 +187,7 @@ class MyTodo: NSObject, NSSecureCoding {
     //NSCodingプロトコルに宣言されているデシリアライズ処理。デコード処理とも呼ばれる。
     required init?(coder aDecoder: NSCoder) {
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
-        todoDone = aDecoder.decodeBool(forKey:"todoDone")
+        todoDone = aDecoder.decodeBool(forKey: "todoDone")
     }
     //NSCodingプロトコルに宣言されているシリアライズ処理、エンコード処理とも呼ばれる。
     func encode(with aCoder: NSCoder) {
