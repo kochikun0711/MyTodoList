@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //+ボタンをタップした時に呼ばれる処理
-    @IBAction func taoAddButton(_ sender: Any) {
+    @IBAction func tapAddButton(_ sender: Any) {
         //アラートダイアログを生成
         let alertController = UIAlertController(title: "TODO追加",
                                                 message: "ToDoを入力してください", preferredStyle:
