@@ -86,14 +86,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         present(alertController, animated: true, completion: nil)
     }
     
-    //テーブルの行数を返却する
+    //テーブルの行数を返却する　セルをどこまでの行数を使うか教えてくれるメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:
         Int) -> Int {
         //Todoの配列の長さを返却する
         return todoList.count
     }
     
-    //テーブルの行ごとのセルを返却する
+    //テーブルの行ごとのセルを返却する　セルの内容を確定するメソッド
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Storyboardで指定したToDoCELL識別を利用してサイリ用可能なセルを取得する
