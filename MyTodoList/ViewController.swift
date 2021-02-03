@@ -137,6 +137,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             userDefaults.set(data, forKey: "todoList")
             userDefaults.synchronize()
         } catch {
+            print("エラーが発生しました")
         }
         
     }
